@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mayan-edms
+  labels:
+    app.kubernetes.io/name: mayan-edms
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mayan-edms
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mayan-edms
+    spec:
+      serviceAccountName: mayan-edms
+      containers:
+        - name: mayan-edms
+          image: mayanedms/mayanedms
+          imagePullPolicy: Always
+          env:
+            - name: MAYAN_DOCKER_WAIT
+              value: mayan-postgresql:5432 mayan-redis-master:6379
+            - name: MAYAN_LOCK_MANAGER_BACKEND
+              value: mayan.apps.lock_manager.backends.redis_lock.RedisLock
+            - name: MAYAN_CELERY_BROKER_URL
+              valueFrom:
+                secretKeyRef:
+                  name: mayan
+                  key: celery_broker_url
+            - name: MAYAN_CELERY_RESULT_BACKEND
+              valueFrom:
+                secretKeyRef:
+                  name: mayan
+                  key: celery_result_backend
+            - name: MAYAN_DATABASES
+              valueFrom:
+                secretKeyRef:
+                  name: mayan
+                  key: databases
+            - name: MAYAN_LOCK_MANAGER_BACKEND_ARGUMENTS
+              valueFrom:
+                secretKeyRef:
+                  name: mayan
+                  key: lock_manager_backend_arguments
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 10
+            periodSeconds: 5
+          volumeMounts:
+            - name: mayan-volume
+              mountPath: /var/lib/mayan
+              readOnly: false
+      volumes:
+        - name: mayan-volume
+          persistentVolumeClaim:
+            claimName: mayan-volume-data

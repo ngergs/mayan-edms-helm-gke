@@ -1,0 +1,30 @@
+replicaCount: 1
+namespace: mayan # set consistent to namespace of helm chart and secret
+volume:
+  data:
+    diskSize: 100G
+    name: mayan-k8s-data # adjust as needed
+  postgresql:
+    diskSize: 10G
+    name: mayan-k8s-postgresql # adjust as needed
+
+postgresql:
+  image:
+    tag: 10
+    pullPolicy: Always
+  volumePermissions:
+    enabled: true
+  persistence:
+    existingClaim: mayan-volume-postgresql # do not edit
+    storageClass: mayan-storage # do not edit
+    size: 100G
+  existingSecret: mayan
+  postgresqlDatabase: mayan # do not edit
+  postgresqlUsername: mayan # do not edit
+redis:
+  image:
+    pullPolicy: Always
+  architecture: standalone
+  auth:
+    existingSecret: mayan
+    existingSecretPasswordKey: redis-password

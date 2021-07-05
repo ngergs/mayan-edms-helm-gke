@@ -9,6 +9,7 @@ volume:
     name: mayan-k8s-postgresql # adjust as needed
 
 postgresql:
+  password: #edit
   image:
     tag: 10
     pullPolicy: Always
@@ -21,10 +22,13 @@ postgresql:
   existingSecret: mayan
   postgresqlDatabase: mayan # do not edit
   postgresqlUsername: mayan # do not edit
+
 redis:
+  password: #edit
   image:
     pullPolicy: Always
   architecture: standalone
   auth:
     existingSecret: mayan
     existingSecretPasswordKey: redis-password
+

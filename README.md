@@ -9,5 +9,3 @@ A minimalistic helm chart to setup [mayan edms](https://github.com/mayan-edms/Ma
     gcloud beta compute disks create mayan-postgresql --project={{your project}} --type=pd-standard --size=10GB --zone=europe-west3-a
     ```
     Then create a temporary VPC instance and format the disk as described in the [google docs](https://cloud.google.com/compute/docs/disks/add-persistent-disk).
-
-* A k8s secret has to be provided for the given namespace, see the secret.sh shell script (fill the blank password variables and adjust the namespace as required before executing it).

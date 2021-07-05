@@ -28,12 +28,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mayan
-                  key: celery_broker_url
+                  key: celery-broker-url
             - name: MAYAN_CELERY_RESULT_BACKEND
               valueFrom:
                 secretKeyRef:
                   name: mayan
-                  key: celery_result_backend
+                  key: celery-result-backend
             - name: MAYAN_DATABASES
               valueFrom:
                 secretKeyRef:
@@ -43,7 +43,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: mayan
-                  key: lock_manager_backend_arguments
+                  key: lock-manager-backend-arguments
           ports:
             - name: http
               containerPort: 8000

@@ -1,4 +1,5 @@
 replicaCount: 1
+domain: #edit
 namespace: mayan # set consistent to namespace of helm chart and secret
 volume:
   data:

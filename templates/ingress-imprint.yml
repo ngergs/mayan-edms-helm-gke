@@ -1,0 +1,24 @@
+{{- if .Values.imprint -}}
+{{- range .Values.domains -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: mayan-edms-{{ .name }}-imprint
+  annotations:
+    nginx.org/mergeable-ingress-type: minion
+spec:
+  ingressClassName: nginx-kubeip
+  rules:
+  - host: {{ .name }}
+    http:
+      paths:
+      - path: /imprint
+        pathType: Exact
+        backend:
+          service:
+            name: imprint
+            port:
+              number: 8080
+---
+{{- end }}
+{{- end }}

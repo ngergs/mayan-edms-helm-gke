@@ -1,5 +1,11 @@
 replicaCount: 1
-domains: #edit
+domains:
+  - name:
+    hsts:
+      enabled: false
+      preload: false
+      subdomains: false
+      max-age: 63072000
 namespace: mayan # set consistent to namespace of helm chart and secret
 volume:
   data:
@@ -8,6 +14,7 @@ volume:
   postgresql:
     diskSize: 10G
     name: mayan-k8s-postgresql # adjust as needed
+imprint:
 
 postgresql:
   password: #edit

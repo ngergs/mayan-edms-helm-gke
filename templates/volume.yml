@@ -15,7 +15,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   claimRef:
-    namespace: {{ .Values.namespace }}
+    namespace: {{ .Release.Namespace }}
     name: mayan-volume-data
   gcePersistentDisk:
     pdName: {{ .Values.volume.data.name }}
@@ -50,7 +50,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   claimRef:
-    namespace: {{ .Values.namespace }}
+    namespace: {{ .Release.Namespace }}
     name: mayan-volume-postgresql
   gcePersistentDisk:
     pdName: {{ .Values.volume.postgresql.name }}

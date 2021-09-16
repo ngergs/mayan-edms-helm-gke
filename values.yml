@@ -1,12 +1,12 @@
+
 replicaCount: 1
 domains:
   - name:
     hsts:
       enabled: false
-      preload: false
-      subdomains: false
-      max-age: 63072000
-namespace: mayan # set consistent to namespace of helm chart and secret
+      preload: true
+      subdomains: true
+      max_age: "63072000"
 volume:
   data:
     diskSize: 100G

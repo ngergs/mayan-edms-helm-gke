@@ -6,6 +6,7 @@ metadata:
   name: mayan-edms-{{ .name }}-imprint
   annotations:
     nginx.org/mergeable-ingress-type: minion
+
 spec:
   ingressClassName: nginx-kubeip
   rules:

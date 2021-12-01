@@ -1,9 +1,9 @@
 
 replicaCount: 1
 domains:
-  - name:
+  - name: archive.ngergs.de
     hsts:
-      enabled: false
+      enabled: true
       preload: true
       subdomains: true
       max_age: "63072000"
@@ -14,7 +14,7 @@ volume:
   postgresql:
     diskSize: 10G
     name: mayan-k8s-postgresql # adjust as needed
-imprint:
+imprint: "<html><head><title>Impressum</title></head><body><p><b>Impressum</b><br>Niklas Gergs<br>Redderbusch 55a<br>21698 Harsefeld<br>Email: admin (at) ngergs.de</p><p><b>Datenschutzerklärung</b><br>Beim Zugriff auf diese Webseiten werden die zugehörigen IP-Adressen gespeichert.<br>Die Log-Dateien werden ohne spezifischen Anlass nicht ausgewertet und nach 90 Tagen gelöscht.<br>Für den öffentlichen Berreichen werden keine weitergehenden benutzerbezogenen Daten erhoben, gespeichert oder ausgewertet.<br>Es werden keine Tracking-Cookies eingesetzt.</p></body></html>"
 
 postgresql:
   password: #edit

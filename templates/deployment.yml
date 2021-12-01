@@ -15,9 +15,11 @@ spec:
         app.kubernetes.io/name: mayan-edms
     spec:
       serviceAccountName: mayan-edms
+      nodeSelector:
+        cloud.google.com/gke-nodepool: {{ .Values.gke.generalNodePoolName }}
       containers:
         - name: mayan-edms
-          image: mayanedms/mayanedms
+          image: mayanedms/mayanedms:s4.1
           imagePullPolicy: Always
           env:
             - name: MAYAN_DOCKER_WAIT

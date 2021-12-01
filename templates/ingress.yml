@@ -22,7 +22,9 @@ metadata:
       add_header Cross-Origin-Resource-Policy "same-site" always;
       add_header Cache-Control "no-cache,no-store,must-revalidate" always;
       add_header Pragma "no-cache" always;
-      sub_filter '</body>' '<a href="https://$host/imprint">Impressum</a></body>';
+{{- if $.Values.imprint }}
+      sub_filter '</body>' '<div style="display:flex;justify-content:center;"><a href="https://$host/imprint">Impressum</a></div></body>';
+{{- end }}
       sub_filter_once on;
 spec:
   ingressClassName: nginx-kubeip
